@@ -22,6 +22,7 @@ let tblBody = document.getElementById("tbl_body");
 // tmp
 let update_i;
 let disable_cnt = true;
+let searchBy = 1;
 
 if (localStorage.data != null) {
   table_update(JSON.parse(localStorage.data));
@@ -162,7 +163,7 @@ function show_product(item) {
   discount.value = data[item].discount;
   category.value = data[item].category;
   cntTotal();
-  
+
   to_update_mode(item);
 }
 
@@ -173,15 +174,47 @@ function to_update_mode(item) {
   update_i = item;
   scroll({
     top: 0,
-    behavior: "smooth"
-  })
-  if(!disable_cnt) count.setAttribute("disabled", "true");
-  
+    behavior: "smooth",
+  });
+  if (!disable_cnt) count.setAttribute("disabled", "true");
 }
 
 // in add mode
 function to_add_mode() {
   add.innerHTML = "Add";
   add.value = "add";
-  if(!disable_cnt) count.removeAttribute("disabled");
+  if (!disable_cnt) count.removeAttribute("disabled");
+}
+
+search.onkeyup = () => {
+  console.log("click");
+  searchOn();
+};
+
+searchByTitle.onclick = () => {
+  searchBy = 1;
+};
+
+searchByID.onclick = () => {
+  searchBy = 2;
+};
+
+// search
+
+function searchOn() {
+  let data = JSON.parse(localStorage.data);
+  let newData = [];
+  console.log("search on");
+  if (searchBy == 1) {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].title.includes(search.value.toLowerCase())) {
+        console.log(data[i]);
+        newData.push(data[i]);
+      }
+    }
+  } else {
+    newData.push(data[+search.value]);
+  }
+
+  table_update(newData);
 }
