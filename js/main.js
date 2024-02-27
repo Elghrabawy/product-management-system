@@ -104,6 +104,8 @@ function table_update(products) {
   } else {
     deleteAll.style.display = "none";
   }
+
+  cntTotal();
 }
 
 // insert products in table
@@ -160,7 +162,7 @@ function show_product(item) {
   discount.value = data[item].discount;
   category.value = data[item].category;
   cntTotal();
-
+  
   to_update_mode(item);
 }
 
@@ -169,7 +171,12 @@ function to_update_mode(item) {
   add.innerHTML = "Update";
   add.value = "update";
   update_i = item;
+  scroll({
+    top: 0,
+    behavior: "smooth"
+  })
   if(!disable_cnt) count.setAttribute("disabled", "true");
+  
 }
 
 // in add mode
