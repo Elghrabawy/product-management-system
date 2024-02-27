@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap css -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Normalization -->
+    <link rel="stylesheet" href="css/normalize.css" />
+
+    <!-- (Awesome Library) font icons -->
+    <link rel="stylesheet" href="css/all.min.css" />
+
+    <!-- Main template css file -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Fonts family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>producty</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>CRUDS</h1>
+      <p>Products Management System</p>
+    </header>
+
+    <!-- Input -->
+    <div class="input">
+      <div class="container">
+        <input id="title" type="text" placeholder="title" />
+        <div class="paid">
+          <input
+            onkeyup="cntTotal()"
+            id="price"
+            type="number"
+            placeholder="price"
+          />
+          <input
+            onkeyup="cntTotal()"
+            id="taxes"
+            type="number"
+            placeholder="taxes"
+          />
+          <input
+            onkeyup="cntTotal()"
+            id="ads"
+            type="number"
+            placeholder="ads"
+          />
+          <input
+            onkeyup="cntTotal()"
+            id="discount"
+            type="number"
+            placeholder="discount"
+          />
+          <small id="total">0</small>
+        </div>
+        <input id="count" type="number" placeholder="count" />
+        <input id="category" type="text" placeholder="category" />
+        <button disabled id="add">Add</button>
+      </div>
+    </div>
+
+    <!-- Output -->
+    <div class="output">
+      <div class="container">
+        <div class="search">
+          <input id="search_box" type="text" placeholder="search" />
+          <div class="search-btns">
+            <button id="s_byTitle">Search By Title</button>
+            <button id="s_byID">Search By ID</button>
+          </div>
+        </div>
+        <div class="products">
+          <table></table>
+        </div>
+
+        <table id="products">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>price</th>
+              <th>taxes</th>
+              <th>ads</th>
+              <th>discount</th>
+              <th>total</th>
+              <th>category</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tbl_body">
+            <!-- <tr>
+              <td>1</td>
+              <td>Iphone 13</td>
+              <td>23000</td>
+              <td>100</td>
+              <td>200</td>
+              <td>200</td>
+              <td>20000</td>
+              <td>phone</td>
+              <td><button id="upd">Update</button></td>
+              <td><button id="del">Delete</button></td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- JavaScript File -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
