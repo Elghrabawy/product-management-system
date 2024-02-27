@@ -13,13 +13,13 @@ let search = document.getElementById("search_box");
 let add = document.getElementById("add");
 let searchByTitle = document.getElementById("s_byTitle");
 let searchByID = document.getElementById("s_byID");
+let deleteAll = document.getElementById("delete_all");
 
 // table
 let table = document.getElementById("products");
 let tblBody = document.getElementById("tbl_body");
 
-if(localStorage.data != null)
-  table_insert(JSON.parse(localStorage.data));
+if (localStorage.data != null) table_insert(JSON.parse(localStorage.data));
 
 // onload
 onload = () => {
@@ -76,11 +76,23 @@ add.onclick = () => {
   title.value = price.value = taxes.value = ads.value = discount.value = count.value = category.value = total.innerHTML =
     "";
 
-  tblBody.innerHTML = "";
-  table_insert(data);
+  table_update(data);
 };
 
 // update table
+function table_update(products) {
+  tblBody.innerHTML = "";
+  table_insert(products);
+
+  // show delete all buttom
+  if (products.length > 0) {
+    deleteAll.style.display = "block";
+  } else {
+    deleteAll.style.display = "none";
+  }
+}
+
+// insert products in table
 function table_insert(products) {
   if (products == null) return false;
 
@@ -106,12 +118,19 @@ function table_insert(products) {
   }
 }
 
+// delete item from table
 function table_delete(item) {
   let data = JSON.parse(localStorage.data);
   data.splice(item, 1);
 
   localStorage.data = JSON.stringify(data);
-  
-  tblBody.innerHTML = "";
-  table_insert(data)
+
+  table_update(data);
+}
+
+
+// delete all
+deleteAll.onclick = () => {
+  localStorage.removeItem('data');
+  table_update([]);
 }

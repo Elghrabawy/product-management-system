@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap css -->
-    <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" /> -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Normalization -->
     <link rel="stylesheet" href="css/normalize.css" />
@@ -35,7 +35,7 @@
     <!-- Input -->
     <div class="input">
       <div class="container">
-        <input id="title" type="text" placeholder="title" />
+        <input maxlength="18" id="title" type="text" placeholder="title" />
         <div class="paid">
           <input
             onkeyup="cntTotal()"
@@ -78,6 +78,7 @@
             <button id="s_byTitle">Search By Title</button>
             <button id="s_byID">Search By ID</button>
           </div>
+          <button style = "display: none;" id="delete_all">Delete all</button>
         </div>
         <div class="products">
           <table></table>
@@ -99,18 +100,6 @@
             </tr>
           </thead>
           <tbody id="tbl_body">
-            <!-- <tr>
-              <td>1</td>
-              <td>Iphone 13</td>
-              <td>23000</td>
-              <td>100</td>
-              <td>200</td>
-              <td>200</td>
-              <td>20000</td>
-              <td>phone</td>
-              <td><button id="upd">Update</button></td>
-              <td><button id="del">Delete</button></td>
-            </tr> -->
           </tbody>
         </table>
       </div>
