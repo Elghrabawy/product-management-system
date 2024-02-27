@@ -66,6 +66,10 @@ input {
   background-color: var(--primary);
 }
 
+input:disabled{
+  opacity: 70%;
+}
+
 input:focus {
   box-shadow: 0px 0px 4px var(--onprimary-container);
   background-color: var(--onprimary-container);
@@ -85,7 +89,6 @@ button {
 }
 
 
-
 button:disabled {
   opacity: 70%;
 }
@@ -94,6 +97,7 @@ button:hover:not(:disabled) {
   transition: 1s;
   letter-spacing: 1.3px;
   background-color: var(--secondary-container);
+  cursor: pointer;
 }
 
 
@@ -153,6 +157,7 @@ th {
   font-weight: 900;
   border-bottom: var(--onprimary);
   border-style: solid;
+  border-width: 0px;
   border-bottom-width: 2px;
 }
 

@@ -16,10 +16,13 @@ let searchByID = document.getElementById("s_byID");
 
 // table
 let table = document.getElementById("products");
+let tblBody = document.getElementById("tbl_body");
+
+if(localStorage.data != null)
+  table_insert(JSON.parse(localStorage.data));
 
 // onload
 onload = () => {
-  table_insert(JSON.parse(localStorage.data));
   console.log("onload");
 };
 
@@ -64,85 +67,51 @@ add.onclick = () => {
     data = JSON.parse(localStorage.data);
   }
 
-  data.push(newProd);
+  let cnt = +newProd.count;
+  while (cnt--) {
+    data.push(newProd);
+  }
   localStorage.data = JSON.stringify(data);
 
   title.value = price.value = taxes.value = ads.value = discount.value = count.value = category.value = total.innerHTML =
     "";
 
-  // location.reload();
-  table_insert([newProd]);
+  tblBody.innerHTML = "";
+  table_insert(data);
 };
 
 // update table
 function table_insert(products) {
   if (products == null) return false;
 
-  let tblBody = document.getElementById("tbl_body");
   for (let i = 0; i < products.length; i++) {
-    // let row = document.createElement("tr");
-
-    // let id = document.createElement("td");
-    // let title = document.createElement("td");
-    // let price = document.createElement("td");
-    // let taxes = document.createElement("td");
-    // let ads = document.createElement("td");
-    // let discount = document.createElement("td");
-    // let total = document.createElement("td");
-    // let category = document.createElement("td");
-    // let upd = document.createElement("td");
-    // let del = document.createElement("td");
-
-    // id.innerHTML = i + 1;
-    // title.innerHTML = products[i].title;
-    // price.innerHTML = products[i].price;
-    // taxes.innerHTML = products[i].taxes;
-    // ads.innerHTML = products[i].ads;
-    // discount.innerHTML = products[i].discount;
-    // total.innerHTML = products[i].total;
-    // category.innerHTML = products[i].category;
-
-    // upd.innerHTML = '<button id="upd">Update</button>';
-    // del.innerHTML = '<button id="del">Delete</button>';
-
-    // console.log(title, price, taxes, ads, discount, total, category);
-
-    // row.appendChild(id);
-    // row.appendChild(title);
-    // row.appendChild(price);
-    // row.appendChild(taxes);
-    // row.appendChild(ads);
-    // row.appendChild(discount);
-    // row.appendChild(total);
-    // row.appendChild(category);
-    // row.appendChild(upd);
-    // row.appendChild(del);
-
     let cnt = +products[i].count;
-    // while(cnt--) tblBody.appendChild(row.cloneNode(true));
-
     console.log(cnt);
     console.log(typeof cnt);
 
-    while (cnt--) {
-      tblBody.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
-        <td>${products[i].title}</td>
-        <td>${products[i].price}</td>
-        <td>${products[i].taxes}</td>
-        <td>${products[i].ads}</td>
-        <td>${products[i].discount}</td>
-        <td>${products[i].total}</td>
-        <td>${products[i].category}</td>
-        <td><button id="upd">Update</button></td>
-        <td><button id="del">Delete</button></td>
-      </tr>
+    tblBody.innerHTML += `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${products[i].title}</td>
+      <td>${products[i].price}</td>
+      <td>${products[i].taxes}</td>
+      <td>${products[i].ads}</td>
+      <td>${products[i].discount}</td>
+      <td>${products[i].total}</td>
+      <td>${products[i].category}</td>
+      <td><button id="upd">Update</button></td>
+      <td><button onclick = "table_delete(${i})" id="del">Delete</button></td>
+    </tr>
     `;
-    }
   }
 }
 
-function table_delete(item){
+function table_delete(item) {
+  let data = JSON.parse(localStorage.data);
+  data.splice(item, 1);
+
+  localStorage.data = JSON.stringify(data);
   
+  tblBody.innerHTML = "";
+  table_insert(data)
 }
