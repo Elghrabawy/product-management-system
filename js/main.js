@@ -19,7 +19,7 @@ let deleteAll = document.getElementById("delete_all");
 let table = document.getElementById("products");
 let tblBody = document.getElementById("tbl_body");
 
-if (localStorage.data != null) table_insert(JSON.parse(localStorage.data));
+if (localStorage.data != null) table_update(JSON.parse(localStorage.data));
 
 // onload
 onload = () => {
