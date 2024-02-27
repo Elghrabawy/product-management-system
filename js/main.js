@@ -19,7 +19,13 @@ let deleteAll = document.getElementById("delete_all");
 let table = document.getElementById("products");
 let tblBody = document.getElementById("tbl_body");
 
-if (localStorage.data != null) table_update(JSON.parse(localStorage.data));
+// tmp
+let update_i;
+let disable_cnt = true;
+
+if (localStorage.data != null) {
+  table_update(JSON.parse(localStorage.data));
+}
 
 // onload
 onload = () => {
@@ -66,11 +72,19 @@ add.onclick = () => {
   if (localStorage.data != null) {
     data = JSON.parse(localStorage.data);
   }
-
-  let cnt = +newProd.count;
-  while (cnt--) {
-    data.push(newProd);
+  // in add mode
+  if (add.value == "add") {
+    let cnt = +newProd.count;
+    while (cnt--) {
+      data.push(newProd);
+    }
   }
+  // in update mode
+  else if (add.value == "update") {
+    data[update_i] = newProd;
+    to_add_mode();
+  }
+
   localStorage.data = JSON.stringify(data);
 
   title.value = price.value = taxes.value = ads.value = discount.value = count.value = category.value = total.innerHTML =
@@ -111,7 +125,7 @@ function table_insert(products) {
       <td>${products[i].discount}</td>
       <td>${products[i].total}</td>
       <td>${products[i].category}</td>
-      <td><button id="upd">Update</button></td>
+      <td><button onclick = "show_product(${i})" id="upd">Update</button></td>
       <td><button onclick = "table_delete(${i})" id="del">Delete</button></td>
     </tr>
     `;
@@ -128,9 +142,39 @@ function table_delete(item) {
   table_update(data);
 }
 
-
 // delete all
 deleteAll.onclick = () => {
-  localStorage.removeItem('data');
+  localStorage.removeItem("data");
   table_update([]);
+};
+
+// show item data in fildes
+function show_product(item) {
+  let data = JSON.parse(localStorage.data);
+
+  title.value = data[item].title;
+  price.value = data[item].price;
+  taxes.value = data[item].taxes;
+  ads.value = data[item].ads;
+  count.value = "";
+  discount.value = data[item].discount;
+  category.value = data[item].category;
+  cntTotal();
+
+  to_update_mode(item);
+}
+
+// in update mode
+function to_update_mode(item) {
+  add.innerHTML = "Update";
+  add.value = "update";
+  update_i = item;
+  if(!disable_cnt) count.setAttribute("disabled", "true");
+}
+
+// in add mode
+function to_add_mode() {
+  add.innerHTML = "Add";
+  add.value = "add";
+  if(!disable_cnt) count.removeAttribute("disabled");
 }
