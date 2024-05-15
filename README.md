@@ -1,1 +1,1 @@
-repo: https://elghrabawy.github.io/product-management-system/
+demo : https://elghrabawy.github.io/product-management-system/
